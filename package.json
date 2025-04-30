@@ -1,0 +1,25 @@
+{
+  "name": "decktap",
+  "version": "1.0.0",
+  "description": "📡 DeckTap is a lightweight local-network remote for controlling presentations.   Use your phone to wirelessly control PowerPoint, Keynote, PDF slideshows — no app installation needed.",
+  "homepage": "https://github.com/Rico00121/decktap#readme",
+  "bugs": {
+    "url": "https://github.com/Rico00121/decktap/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rico00121/decktap.git"
+  },
+  "author": "Rico",
+  "type": "commonjs",
+  "main": "client/lan.js",
+  "scripts": {
+    "start": "node client/lan.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@nut-tree/nut-js": "^3.1.2",
+    "express": "^5.1.0",
+    "ws": "^8.18.1"
+  }
+}
