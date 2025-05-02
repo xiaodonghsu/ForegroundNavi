@@ -136,3 +136,8 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+# distributions
+decktap-linux
+decktap-win.exe
+decktap-macos
+
