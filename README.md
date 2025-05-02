@@ -1,6 +1,6 @@
 # DeckTap (LAN MVP)
 
-<img src="./images/hero.png" width="600">
+<iframe width="600" height="338" src="https://youtu.be/pNgNUWSf7C4" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 📡 DeckTap is a lightweight local-network remote for controlling presentations.  
 Use your phone to wirelessly control PowerPoint, Keynote, PDF slideshows — no app installation needed.
