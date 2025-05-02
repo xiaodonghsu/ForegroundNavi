@@ -4,13 +4,20 @@ const WebSocket = require('ws');
 const { keyboard, Key } = require("@nut-tree/nut-js");
 const os = require('os');
 const qrcode = require('qrcode-terminal');
+const path = require('path');
 
 const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 const port = 9999;
 
-app.use(express.static(__dirname + '/../controller/public'));
+// 判断是否为 pkg 打包环境
+const isPkg = typeof process.pkg !== 'undefined';
+const staticPath = isPkg
+  ? path.join(path.dirname(process.execPath), 'controller', 'public')
+  : __dirname + '/../controller/public';
+
+app.use(express.static(staticPath));
 
 wss.on('connection', (ws) => {
   console.log('📲 Mobile phone controller connected');
