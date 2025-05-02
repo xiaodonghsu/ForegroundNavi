@@ -16,14 +16,12 @@ wss.on('connection', (ws) => {
   console.log('📲 Mobile phone controller connected');
   ws.on('message', (message) => {
     const msg = message.toString();
-    console.log('📨 Received a message:', msg);
     if (msg === 'next') {
       try {     
         (async () => {
             await keyboard.pressKey(Key.Right);
             await keyboard.releaseKey(Key.Right);
         })();
-        console.log('✅ The right arrow key simulated successfully');
       } catch (error) {
         console.error('❌ Key simulation failed:', error);
       }
@@ -33,7 +31,6 @@ wss.on('connection', (ws) => {
             await keyboard.pressKey(Key.Left);
             await keyboard.releaseKey(Key.Left);
         })();
-        console.log('✅ The left arrow key simulated successfully');
       } catch (error) {
         console.error('❌ Key simulation failed:', error);
       }
