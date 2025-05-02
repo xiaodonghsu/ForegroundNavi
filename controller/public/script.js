@@ -58,4 +58,79 @@ nextBtn.addEventListener('click', () => {
 });
 
 // 初始连接
-connect(); 
+connect();
+
+// 计时器相关变量
+let timerInterval;
+let seconds = 0;
+let isRunning = false;
+
+// 计时器显示元素
+const timerDisplay = document.querySelector('.timer-display');
+
+// 格式化时间
+function formatTime(totalSeconds) {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+}
+
+// 更新计时器显示
+function updateTimerDisplay() {
+    timerDisplay.textContent = formatTime(seconds);
+}
+
+// 开始计时
+document.getElementById('startTimer').addEventListener('click', () => {
+    if (!isRunning) {
+        isRunning = true;
+        timerInterval = setInterval(() => {
+            seconds++;
+            updateTimerDisplay();
+        }, 1000);
+    }
+});
+
+// 暂停计时
+document.getElementById('pauseTimer').addEventListener('click', () => {
+    if (isRunning) {
+        isRunning = false;
+        clearInterval(timerInterval);
+    }
+});
+
+// 重置计时
+document.getElementById('resetTimer').addEventListener('click', () => {
+    isRunning = false;
+    clearInterval(timerInterval);
+    seconds = 0;
+    updateTimerDisplay();
+});
+
+// 左右手切换功能
+const controls = document.querySelector('.controls');
+const toggleHandBtn = document.getElementById('toggleHand');
+const handIcon = document.querySelector('.hand-icon');
+
+toggleHandBtn.addEventListener('click', () => {
+    controls.classList.toggle('right-handed');
+    handIcon.textContent = controls.classList.contains('right-handed') ? '👉' : '👈';
+});
+
+// 保存用户偏好到本地存储
+function saveHandPreference(isRightHanded) {
+    localStorage.setItem('isRightHanded', isRightHanded);
+}
+
+function loadHandPreference() {
+    const isRightHanded = localStorage.getItem('isRightHanded') === 'true';
+    if (isRightHanded) {
+        controls.classList.add('right-handed');
+        handIcon.textContent = '👉';
+    }
+}
+
+// 页面加载时恢复用户偏好
+loadHandPreference(); 
