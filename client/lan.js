@@ -3,6 +3,7 @@ const http = require('http');
 const WebSocket = require('ws');
 const { keyboard, Key } = require("@nut-tree/nut-js");
 const os = require('os');
+const qrcode = require('qrcode-terminal');
 
 const app = express();
 const server = http.createServer(app);
@@ -51,7 +52,10 @@ wss.on('connection', (ws) => {
 });
 
 server.listen(port, () => {
-  console.log(`✅ DeckTap LAN service has been started：http://${getLocalIP()}:${port}`);
+  const controlUrl = `http://${getLocalIP()}:${port}`;
+  console.log(`\n✅ DeckTap LAN service has been started：${controlUrl}`);
+  console.log('\n🔗 Please open the above link with your mobile phone under the same Wi-Fi, or scan the QR code below:\n');
+  qrcode.generate(controlUrl, { small: true });
 });
 
 process.on('SIGINT', () => {
