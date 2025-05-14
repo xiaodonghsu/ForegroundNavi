@@ -134,3 +134,33 @@ function loadHandPreference() {
 
 // 页面加载时恢复用户偏好
 loadHandPreference(); 
+
+// 窗口切换功能
+const switchAppBtn = document.getElementById('switchApp');
+let switchTimer = null;
+
+// 自动确认函数
+const autoConfirm = () => {
+    if (ws && ws.readyState === WebSocket.OPEN) {
+        ws.send('activate_app');
+        console.log('✅ Window selected');
+    }
+};
+
+switchAppBtn.addEventListener('click', () => {
+    if (ws && ws.readyState === WebSocket.OPEN) {
+        // 发送切换命令
+        ws.send('switch_app');
+        console.log('🔄 Switching Window');
+
+        // 清除之前的计时器
+        if (switchTimer) {
+            clearTimeout(switchTimer);
+        }
+
+        // 设置新的计时器，1秒后自动确认
+        switchTimer = setTimeout(autoConfirm, 1000);
+    } else {
+        console.log('❌ WebSocket Not Connected');
+    }
+});
